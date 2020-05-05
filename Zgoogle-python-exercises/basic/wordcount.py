@@ -39,6 +39,9 @@ print_words() and print_top().
 
 import sys
 
+from collections import OrderedDict 
+
+
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
@@ -47,11 +50,33 @@ import sys
 
 ###
 
+def get_word_count(filename):
+  word_count = {}
+  with open(filename) as f:
+    all_words =  f.read().lower().split()
+    all_words_Set = sorted(set(all_words))
+    for word in all_words_Set:
+      word_count[word] = all_words.count(word)
+  return word_count
+
+def print_words(filename):
+  word_count = get_word_count(filename)
+  print(word_count)
+  for key in word_count:
+    print (key, word_count[key])
+
+def getkey(item):
+  return item[1]
+
+def print_top(filename):
+  word_count = sorted(get_word_count(filename).items(), key = getkey, reverse = True)
+  for item in word_count[:20]:
+    print (item[0] , item[1])
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
   if len(sys.argv) != 3:
-    print 'usage: ./wordcount.py {--count | --topcount} file'
+    print ('usage: ./wordcount.py {--count | --topcount} file')
     sys.exit(1)
 
   option = sys.argv[1]
@@ -61,7 +86,7 @@ def main():
   elif option == '--topcount':
     print_top(filename)
   else:
-    print 'unknown option: ' + option
+    print ('unknown option: ' + option)
     sys.exit(1)
 
 if __name__ == '__main__':

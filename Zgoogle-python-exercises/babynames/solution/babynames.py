@@ -40,7 +40,7 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  # +++your code here+++
+  #help  +++your code here+++
   # LAB(begin solution)
   # The list [year, name_and_rank, name_and_rank, ...] we'll eventually return.
   names = []
@@ -125,7 +125,7 @@ def main():
       outf.write(text + '\n')
       outf.close()
     else:
-      print text
+      print (text)
   # LAB(end solution)
 
 if __name__ == '__main__':
